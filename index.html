@@ -24,7 +24,9 @@
     }
 
     body {
-      background: linear-gradient(135deg, #1a0205 0%, #3a0007 50%, #0f0003 100%);
+      background: linear-gradient(rgba(15, 0, 3, 0.8), rgba(26, 2, 5, 0.88)), 
+                  url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+      background-size: cover;
       color: #333;
       min-height: 100vh;
       overflow-x: hidden;
@@ -105,7 +107,7 @@
     .welcome-card {
       position: relative;
       z-index: 2;
-      background: rgba(30, 0, 4, 0.75);
+      background: rgba(30, 0, 4, 0.78);
       backdrop-filter: blur(12px);
       border: 2px solid var(--lfc-gold);
       border-radius: 20px;
@@ -117,7 +119,7 @@
     }
 
     .welcome-card h2 {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       white-space: nowrap;
       color: var(--lfc-gold);
       text-shadow: 0 2px 4px rgba(0,0,0,0.8);
@@ -127,7 +129,7 @@
       background: linear-gradient(45deg, var(--lfc-red), #e63946);
       color: white;
       border: 2px solid var(--lfc-gold);
-      padding: 14px 28px;
+      padding: 12px 30px;
       font-size: 1.1rem;
       font-weight: bold;
       border-radius: 50px;
@@ -170,7 +172,7 @@
     /* Quick Actions Navigation */
     .nav-buttons {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       margin: 25px 0;
     }
@@ -196,7 +198,7 @@
       border-color: var(--lfc-gold);
     }
 
-    /* Love Meter Section */
+    /* Section Card General */
     .section-card {
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(10px);
@@ -214,51 +216,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-    }
-
-    .progress-bar-bg {
-      background: rgba(255, 255, 255, 0.2);
-      height: 24px;
-      border-radius: 12px;
-      overflow: hidden;
-      margin: 15px 0;
-      position: relative;
-    }
-
-    .progress-bar-fill {
-      background: linear-gradient(90deg, #ff4d6d, var(--lfc-red), var(--lfc-gold));
-      height: 100%;
-      width: 50%;
-      border-radius: 12px;
-      transition: width 0.4s ease;
-    }
-
-    .progress-text {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 0.85rem;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    }
-
-    .btn-heart {
-      background: #ff4d6d;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      display: block;
-      margin: 10px auto 0;
-      transition: 0.2s;
-    }
-
-    .btn-heart:active {
-      transform: scale(0.95);
     }
 
     /* VIP Matchday Tickets Flip Grid */
@@ -399,7 +356,7 @@
 
   <!-- Welcome Screen Overlay with Fullscreen Background Photo -->
   <div class="welcome-overlay" id="welcomeOverlay">
-    <!-- Ảnh nền full màn hình (Thay đường dẫn ảnh hai đứa ở thuộc tính src bên dưới) -->
+    <!-- Ảnh nền full màn hình -->
     <img class="welcome-bg-image" id="couplePhoto" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80" alt="Couple">
 
     <div class="welcome-card">
@@ -407,8 +364,8 @@
       <p style="margin-top: 12px; opacity: 0.95; font-size: 1.1rem;">Gửi tặng Akuma của em :33</p>
       
       <button class="btn-start" onclick="startExperience()">
-  Bất ngờ nèee
-</button>
+        Bất ngờ nèee
+      </button>
     </div>
   </div>
 
@@ -421,21 +378,9 @@
 
     <!-- Quick Actions -->
     <div class="nav-buttons">
-      <button class="nav-btn" onclick="openLetter()"><i class="fas fa-envelope-open-text"></i> Đọc Thư Tình</button>
+      <button class="nav-btn" onclick="openLetter()"><i class="fas fa-envelope-open-text"></i> Thư Tình</button>
       <button class="nav-btn" onclick="scrollToSection('ticketsSection')"><i class="fas fa-ticket-alt"></i> Vé Đổi Quà VIP</button>
-      <button class="nav-btn" onclick="scrollToSection('mvpSection')"><i class="fas fa-trophy"></i> Bảng Vinh Danh MVP</button>
-      <button class="nav-btn" onclick="scrollToSection('loveMeterSection')"><i class="fas fa-fire"></i> Thước Đo Tình Yêu</button>
-    </div>
-
-    <!-- Love Meter Section -->
-    <div class="section-card" id="loveMeterSection">
-      <div class="section-title"><i class="fas fa-heartbeat"></i> Thước Đo Điểm Đáng Yêu</div>
-      <p>Bấm tim để nạp đầy năng lượng chiến thắng cho anh nhé!</p>
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="loveFill"></div>
-        <div class="progress-text" id="loveText">50% MATCHDAY POWER</div>
-      </div>
-      <button class="btn-heart" onclick="addLove()"><i class="fas fa-heart"></i> Bấm Thả Tim (+10%)</button>
+      <button class="nav-btn" onclick="scrollToSection('mvpSection')"><i class="fas fa-trophy"></i> Bảng Vinh Danh</button>
     </div>
 
     <!-- VIP Matchday Tickets Section -->
@@ -500,8 +445,7 @@
     <div class="section-card" id="mvpSection">
       <div class="section-title"><i class="fas fa-crown"></i> Vì Sao Anh Là MVP Của Em?</div>
       <ul class="mvp-list">
-
-                <li class="mvp-item"><i class="fas fa-star"></i> <span>Anh đẹp zaiii, tốt bụng, hiền lành lắmmm.</span></li>
+        <li class="mvp-item"><i class="fas fa-star"></i> <span>Anh đẹp zaiii, tốt bụng, hiền lành lắmmm.</span></li>
         <li class="mvp-item"><i class="fas fa-star"></i> <span>Luôn luôn yêu thương, dịu dàng và cưng chiều em hết mực.</span></li>
         <li class="mvp-item"><i class="fas fa-star"></i> <span>Là chỗ dựa ấm áp và bình yên nhất cho em.</span></li>
         <li class="mvp-item"><i class="fas fa-star"></i> <span>Chỉ cần có anh bên cạnh, ngày nào cũng là ngày tuyệt vời!</span></li>
@@ -533,19 +477,20 @@ I love you nhăm nhăm ❤️💙
   </div>
 
   <script>
-    // Link audio giọng hát của bạn (Thay link mp3 của bạn vào đây)
+    // Link audio giọng hát của bạn
     const AUDIO_URL = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; 
     
-    // Link ảnh của hai bạn (Thay link ảnh hai đứa vào đây)
+    // Link ảnh của hai bạn (Thay link ảnh thực tế của bạn vào đây)
     const MY_PHOTO_URL = "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80";
 
     const audio = document.getElementById('bgAudio');
     audio.src = AUDIO_URL;
 
+    // Tự động thiết lập hình nền cho cả giao diện mở đầu lẫn màn hình bên trong
     document.getElementById('couplePhoto').src = MY_PHOTO_URL;
+    document.body.style.backgroundImage = `linear-gradient(rgba(15, 0, 3, 0.8), rgba(26, 2, 5, 0.88)), url('${MY_PHOTO_URL}')`;
 
     let isPlaying = false;
-    let loveScore = 50;
 
     function startExperience() {
       document.getElementById('welcomeOverlay').style.opacity = '0';
@@ -553,10 +498,8 @@ I love you nhăm nhăm ❤️💙
         document.getElementById('welcomeOverlay').style.visibility = 'hidden';
       }, 500);
 
-      // Play Audio
       playAudio();
 
-      // Fire Confetti
       confetti({
         particleCount: 100,
         spread: 70,
@@ -582,21 +525,6 @@ I love you nhăm nhăm ❤️💙
         document.getElementById('discIcon').classList.remove('disc-spinning');
       } else {
         playAudio();
-      }
-    }
-
-    function addLove() {
-      if (loveScore < 100) {
-        loveScore += 10;
-        if (loveScore > 100) loveScore = 100;
-        document.getElementById('loveFill').style.width = loveScore + '%';
-        document.getElementById('loveText').innerText = loveScore + '% MATCHDAY POWER';
-        
-        confetti({
-          particleCount: 30,
-          spread: 50,
-          origin: { y: 0.7 }
-        });
       }
     }
 
