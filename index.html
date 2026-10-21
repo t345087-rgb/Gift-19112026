@@ -93,15 +93,20 @@
     }
 
     .welcome-card {
-      background: linear-gradient(145deg, #1e0004, #4a000a);
-      border: 2px solid var(--lfc-gold);
-      border-radius: 20px;
-      padding: 30px 20px;
-      max-width: 420px;
-      width: 100%;
-      color: white;
-      box-shadow: 0 10px 40px rgba(200, 16, 46, 0.5);
-    }
+  background: linear-gradient(145deg, #1e0004, #4a000a);
+  border: 2px solid var(--lfc-gold);
+  border-radius: 20px;
+  padding: 30px 20px;
+  max-width: 520px; /* <--- SỬA TỪ 420px THÀNH 520px */
+  width: 90%;       /* <--- THÊM DÒNG NÀY ĐỂ ĐẸP TRÊN ĐIỆN THOẠI */
+  color: white;
+  box-shadow: 0 10px 40px rgba(200, 16, 46, 0.5);
+}
+
+.welcome-card h2 {
+  font-size: 1.35rem;     /* <--- GIẢM NHẸ KÍCH THƯỚC CHỮ */
+  white-space: nowrap;    /* <--- BẮT BỤC NẰM TRÊN 1 DÒNG, KHÔNG XUỐNG DÒNG */
+}
 
     .photo-frame {
       width: 160px;
@@ -430,7 +435,7 @@
       <p style="margin-top: 10px; opacity: 0.9;">Gửi tặng Akuma của em :33</p>
       
       <button class="btn-start" onclick="startExperience()">
-        <i class="fas fa-heart"></i> MỞ QUÀ & LẮNG NGHE EM HÁT
+        <i class="fas fa-heart"></i> Baby ấn đây nhaaaaa
       </button>
     </div>
   </div>
