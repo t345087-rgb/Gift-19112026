@@ -173,61 +173,104 @@
     .nav-buttons {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin: 25px 0;
+      gap: 15px;
+      margin: 40px 0;
     }
 
     .nav-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(30, 0, 4, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       color: white;
-      padding: 12px;
-      border-radius: 12px;
-      backdrop-filter: blur(5px);
+      padding: 18px 10px;
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
+      font-size: 1.05rem;
       font-weight: 600;
-      transition: 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
     .nav-btn:hover {
       background: var(--lfc-red);
       border-color: var(--lfc-gold);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(200, 16, 46, 0.5);
     }
 
-    /* Section Card General */
-    .section-card {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Modals System (Popup cho từng mục) */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 3000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: rgba(30, 0, 4, 0.92);
+      border: 2px solid var(--lfc-gold);
+      color: #fff;
       border-radius: 20px;
-      padding: 25px;
-      margin-bottom: 25px;
-      color: white;
+      max-width: 550px;
+      width: 100%;
+      padding: 30px;
+      position: relative;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
     }
 
-    .section-title {
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 26px;
+      cursor: pointer;
       color: var(--lfc-gold);
-      font-size: 1.3rem;
-      margin-bottom: 15px;
+      transition: 0.2s;
+    }
+
+    .close-modal:hover {
+      transform: scale(1.2);
+    }
+
+    .modal-title {
+      color: var(--lfc-gold);
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      text-align: center;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
+    }
+
+    .letter-body {
+      line-height: 1.8;
+      font-size: 1.05rem;
+      white-space: pre-line;
+      color: #f1f5f9;
     }
 
     /* VIP Matchday Tickets Flip Grid */
     .tickets-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px;
       margin-top: 15px;
     }
 
     .ticket-card {
-      height: 160px;
+      height: 150px;
       perspective: 1000px;
       cursor: pointer;
     }
@@ -277,71 +320,27 @@
     }
 
     .mvp-item {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 12px 15px;
-      border-radius: 10px;
-      margin-bottom: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 12px;
+      font-size: 1rem;
     }
 
     .mvp-item i {
       color: var(--lfc-gold);
-    }
-
-    /* Letter Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 3000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .modal-content {
-      background: #fff;
-      color: #222;
-      border-radius: 20px;
-      max-width: 500px;
-      width: 100%;
-      padding: 30px;
-      position: relative;
-      max-height: 85vh;
-      overflow-y: auto;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 24px;
-      cursor: pointer;
-      color: #666;
-    }
-
-    .letter-title {
-      color: var(--lfc-red);
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    .letter-body {
-      line-height: 1.7;
-      font-size: 1rem;
-      white-space: pre-line;
+      font-size: 1.1rem;
     }
 
     footer {
       text-align: center;
       color: rgba(255, 255, 255, 0.6);
       font-size: 0.85rem;
-      margin-top: 30px;
+      margin-top: 40px;
     }
   </style>
 </head>
@@ -354,9 +353,8 @@
     <audio id="bgAudio" loop></audio>
   </div>
 
-  <!-- Welcome Screen Overlay with Fullscreen Background Photo -->
+  <!-- Welcome Screen Overlay -->
   <div class="welcome-overlay" id="welcomeOverlay">
-    <!-- Ảnh nền full màn hình -->
     <img class="welcome-bg-image" id="couplePhoto" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80" alt="Couple">
 
     <div class="welcome-card">
@@ -376,80 +374,11 @@
       <p>...Because I'm Always With You! ❤️❤️❤️</p>
     </header>
 
-    <!-- Quick Actions -->
+    <!-- Các Nút Chọn Mục (Chạm vào mục nào mới hiện mục đó) -->
     <div class="nav-buttons">
-      <button class="nav-btn" onclick="openLetter()"><i class="fas fa-envelope-open-text"></i> Thư Tình</button>
-      <button class="nav-btn" onclick="scrollToSection('ticketsSection')"><i class="fas fa-ticket-alt"></i> Vé Đổi Quà VIP</button>
-      <button class="nav-btn" onclick="scrollToSection('mvpSection')"><i class="fas fa-trophy"></i> Bảng Vinh Danh</button>
-    </div>
-
-    <!-- VIP Matchday Tickets Section -->
-    <div class="section-card" id="ticketsSection">
-      <div class="section-title"><i class="fas fa-ticket-alt"></i> Vé Tình Yêu Matchday VIP (Chạm để lật)</div>
-      <div class="tickets-grid">
-        <div class="ticket-card" onclick="flipTicket(this)">
-          <div class="ticket-inner">
-            <div class="ticket-front">
-              <h3>TẤM VÉ #01</h3>
-              <p style="margin-top: 8px;">VIP Matchday Pass 🏆</p>
-            </div>
-            <div class="ticket-back">
-              <h4>ĐẶC QUYỀN #01</h4>
-              <p style="margin-top: 8px; font-size: 0.9rem;">Toàn quyền xem bóng đá đêm không bị làm phiền + Có đồ ăn kèm!</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="ticket-card" onclick="flipTicket(this)">
-          <div class="ticket-inner">
-            <div class="ticket-front">
-              <h3>TẤM VÉ #02</h3>
-              <p style="margin-top: 8px;">Thẻ Miễn Phạt 💛</p>
-            </div>
-            <div class="ticket-back">
-              <h4>ĐẶC QUYỀN #02</h4>
-              <p style="margin-top: 8px; font-size: 0.9rem;">Dùng để xoá giải án phạt mỗi khi anh lỡ làm em giận!</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="ticket-card" onclick="flipTicket(this)">
-          <div class="ticket-inner">
-            <div class="ticket-front">
-              <h3>TẤM VÉ #03</h3>
-              <p style="margin-top: 8px;">Massage & Spa 💆‍♂️</p>
-            </div>
-            <div class="ticket-back">
-              <h4>ĐẶC QUYỀN #03</h4>
-              <p style="margin-top: 8px; font-size: 0.9rem;">1 Suất Massage đấm lưng thư giãn 30 phút từ em!</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="ticket-card" onclick="flipTicket(this)">
-          <div class="ticket-inner">
-            <div class="ticket-front">
-              <h3>TẤM VÉ #04</h3>
-              <p style="margin-top: 8px;">Chef Special 🍲</p>
-            </div>
-            <div class="ticket-back">
-              <h4>ĐẶC QUYỀN #04</h4>
-              <p style="margin-top: 8px; font-size: 0.9rem;">Yêu cầu em nấu bất kỳ món ăn nào anh thích!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MVP Reasons Section -->
-    <div class="section-card" id="mvpSection">
-      <div class="section-title"><i class="fas fa-crown"></i> Vì Sao Anh Là MVP Của Em?</div>
-      <ul class="mvp-list">
-        <li class="mvp-item"><i class="fas fa-star"></i> <span>Anh đẹp zaiii, tốt bụng, hiền lành lắmmm.</span></li>
-        <li class="mvp-item"><i class="fas fa-star"></i> <span>Luôn luôn yêu thương, dịu dàng và cưng chiều em hết mực.</span></li>
-        <li class="mvp-item"><i class="fas fa-star"></i> <span>Là chỗ dựa ấm áp và bình yên nhất cho em.</span></li>
-        <li class="mvp-item"><i class="fas fa-star"></i> <span>Chỉ cần có anh bên cạnh, ngày nào cũng là ngày tuyệt vời!</span></li>
-      </ul>
+      <button class="nav-btn" onclick="openModal('letterModal')"><i class="fas fa-envelope-open-text"></i> Thư Tình</button>
+      <button class="nav-btn" onclick="openModal('ticketsModal')"><i class="fas fa-ticket-alt"></i> Vé Đổi Quà VIP</button>
+      <button class="nav-btn" onclick="openModal('mvpModal')"><i class="fas fa-trophy"></i> Bảng Vinh Danh</button>
     </div>
 
     <footer>
@@ -457,11 +386,11 @@
     </footer>
   </div>
 
-  <!-- Love Letter Modal -->
+  <!-- 1. POPUP THƯ TÌNH -->
   <div class="modal" id="letterModal">
     <div class="modal-content">
-      <span class="close-modal" onclick="closeLetter()">&times;</span>
-      <div class="letter-title">💙 Gửi Monkey D. Anh Của Em ❤️</div>
+      <span class="close-modal" onclick="closeModal('letterModal')">&times;</span>
+      <div class="modal-title">💙 Gửi Monkey D. Anh Của Em ❤️</div>
       <div class="letter-body">
 Ngày 19/11 - Ngày Quốc tế Nam giới!
 
@@ -476,17 +405,95 @@ I love you nhăm nhăm ❤️💙
     </div>
   </div>
 
+  <!-- 2. POPUP VÉ ĐỔI QUÀ VIP -->
+  <div class="modal" id="ticketsModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('ticketsModal')">&times;</span>
+      <div class="modal-title"><i class="fas fa-ticket-alt"></i> Vé Tình Yêu Matchday VIP</div>
+      <p style="text-align: center; margin-bottom: 15px; opacity: 0.8; font-size: 0.9rem;">(Chạm vào từng tấm vé để lật xem đặc quyền)</p>
+      
+      <div class="tickets-grid">
+        <div class="ticket-card" onclick="flipTicket(this)">
+          <div class="ticket-inner">
+            <div class="ticket-front">
+              <h3>TẤM VÉ #01</h3>
+              <p style="margin-top: 8px; font-size: 0.85rem;">VIP Matchday Pass 🏆</p>
+            </div>
+            <div class="ticket-back">
+              <h4>ĐẶC QUYỀN #01</h4>
+              <p style="margin-top: 8px; font-size: 0.8rem;">Toàn quyền xem bóng đá đêm không bị làm phiền + Có đồ ăn kèm!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ticket-card" onclick="flipTicket(this)">
+          <div class="ticket-inner">
+            <div class="ticket-front">
+              <h3>TẤM VÉ #02</h3>
+              <p style="margin-top: 8px; font-size: 0.85rem;">Thẻ Miễn Phạt 💛</p>
+            </div>
+            <div class="ticket-back">
+              <h4>ĐẶC QUYỀN #02</h4>
+              <p style="margin-top: 8px; font-size: 0.8rem;">Dùng để xoá giải án phạt mỗi khi anh lỡ làm em giận!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ticket-card" onclick="flipTicket(this)">
+          <div class="ticket-inner">
+            <div class="ticket-front">
+              <h3>TẤM VÉ #03</h3>
+              <p style="margin-top: 8px; font-size: 0.85rem;">Massage & Spa 💆‍♂️</p>
+            </div>
+            <div class="ticket-back">
+              <h4>ĐẶC QUYỀN #03</h4>
+              <p style="margin-top: 8px; font-size: 0.8rem;">1 Suất Massage đấm lưng thư giãn 30 phút từ em!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ticket-card" onclick="flipTicket(this)">
+          <div class="ticket-inner">
+            <div class="ticket-front">
+              <h3>TẤM VÉ #04</h3>
+              <p style="margin-top: 8px; font-size: 0.85rem;">Chef Special 🍲</p>
+            </div>
+            <div class="ticket-back">
+              <h4>ĐẶC QUYỀN #04</h4>
+              <p style="margin-top: 8px; font-size: 0.8rem;">Yêu cầu em nấu bất kỳ món ăn nào anh thích!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. POPUP BẢNG VINH DANH MVP -->
+  <div class="modal" id="mvpModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('mvpModal')">&times;</span>
+      <div class="modal-title"><i class="fas fa-crown"></i> Vì Sao Anh Là MVP Của Em?</div>
+      
+      <ul class="mvp-list">
+        <li class="mvp-item"><i class="fas fa-star"></i> <span>Anh đẹp zaiii, tốt bụng, hiền lành lắmmm.</span></li>
+        <li class="mvp-item"><i class="fas fa-star"></i> <span>Luôn luôn yêu thương, dịu dàng và cưng chiều em hết mực.</span></li>
+        <li class="mvp-item"><i class="fas fa-star"></i> <span>Là chỗ dựa ấm áp và bình yên nhất cho em.</span></li>
+        <li class="mvp-item"><i class="fas fa-star"></i> <span>Chỉ cần có anh bên cạnh, ngày nào cũng là ngày tuyệt vời!</span></li>
+      </ul>
+    </div>
+  </div>
+
   <script>
     // Link audio giọng hát của bạn
     const AUDIO_URL = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; 
     
-    // Link ảnh của hai bạn (Thay link ảnh thực tế của bạn vào đây)
+    // Link ảnh của hai bạn
     const MY_PHOTO_URL = "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80";
 
     const audio = document.getElementById('bgAudio');
     audio.src = AUDIO_URL;
 
-    // Tự động thiết lập hình nền cho cả giao diện mở đầu lẫn màn hình bên trong
+    // Gán ảnh nền cho toàn bộ trang web
     document.getElementById('couplePhoto').src = MY_PHOTO_URL;
     document.body.style.backgroundImage = `linear-gradient(rgba(15, 0, 3, 0.8), rgba(26, 2, 5, 0.88)), url('${MY_PHOTO_URL}')`;
 
@@ -537,21 +544,19 @@ I love you nhăm nhăm ❤️💙
       });
     }
 
-    function openLetter() {
-      document.getElementById('letterModal').style.display = 'flex';
+    // Hàm mở popup
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
       confetti({
-        particleCount: 80,
+        particleCount: 70,
         spread: 60,
         origin: { y: 0.5 }
       });
     }
 
-    function closeLetter() {
-      document.getElementById('letterModal').style.display = 'none';
-    }
-
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    // Hàm đóng popup
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
     }
   </script>
 </body>
