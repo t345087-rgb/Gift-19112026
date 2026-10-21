@@ -77,12 +77,10 @@
       font-size: 16px;
     }
 
-    /* Overlay Welcome Modal */
+    /* Overlay Welcome Fullscreen Background */
     .welcome-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.92);
-      backdrop-filter: blur(10px);
       z-index: 2000;
       display: flex;
       justify-content: center;
@@ -90,58 +88,39 @@
       padding: 20px;
       text-align: center;
       transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-
-    .welcome-card {
-  background: linear-gradient(145deg, #1e0004, #4a000a);
-  border: 2px solid var(--lfc-gold);
-  border-radius: 20px;
-  padding: 30px 20px;
-  max-width: 520px; /* <--- SỬA TỪ 420px THÀNH 520px */
-  width: 90%;       /* <--- THÊM DÒNG NÀY ĐỂ ĐẸP TRÊN ĐIỆN THOẠI */
-  color: white;
-  box-shadow: 0 10px 40px rgba(200, 16, 46, 0.5);
-}
-
-.welcome-card h2 {
-  font-size: 1.35rem;     /* <--- GIẢM NHẸ KÍCH THƯỚC CHỮ */
-  white-space: nowrap;    /* <--- BẮT BỤC NẰM TRÊN 1 DÒNG, KHÔNG XUỐNG DÒNG */
-}
-
-    .photo-frame {
-      width: 160px;
-      height: 160px;
-      margin: 0 auto 20px;
-      border-radius: 50%;
-      border: 4px solid var(--lfc-gold);
       overflow: hidden;
-      position: relative;
-      box-shadow: 0 0 20px rgba(246, 235, 97, 0.4);
-      cursor: pointer;
     }
 
-    .photo-frame img {
+    .welcome-bg-image {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
+      z-index: 1;
+      filter: brightness(0.6);
     }
 
-    .photo-upload-hint {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
+    .welcome-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(30, 0, 4, 0.75);
+      backdrop-filter: blur(12px);
+      border: 2px solid var(--lfc-gold);
+      border-radius: 20px;
+      padding: 35px 25px;
+      max-width: 550px;
+      width: 90%;
       color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      transition: 0.3s;
-      font-size: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
     }
 
-    .photo-frame:hover .photo-upload-hint {
-      opacity: 1;
+    .welcome-card h2 {
+      font-size: 1.4rem;
+      white-space: nowrap;
+      color: var(--lfc-gold);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
 
     .btn-start {
@@ -154,13 +133,13 @@
       border-radius: 50px;
       cursor: pointer;
       margin-top: 20px;
-      box-shadow: 0 5px 15px rgba(200, 16, 46, 0.4);
+      box-shadow: 0 5px 15px rgba(200, 16, 46, 0.6);
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .btn-start:hover {
       transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(246, 235, 97, 0.5);
+      box-shadow: 0 8px 25px rgba(246, 235, 97, 0.7);
     }
 
     /* Main Container */
@@ -401,10 +380,6 @@
       white-space: pre-line;
     }
 
-    input[type="file"] {
-      display: none;
-    }
-
     footer {
       text-align: center;
       color: rgba(255, 255, 255, 0.6);
@@ -422,20 +397,17 @@
     <audio id="bgAudio" loop></audio>
   </div>
 
-  <!-- Welcome Screen Overlay -->
+  <!-- Welcome Screen Overlay with Fullscreen Background Photo -->
   <div class="welcome-overlay" id="welcomeOverlay">
+    <!-- Ảnh nền full màn hình (Thay đường dẫn ảnh hai đứa ở thuộc tính src bên dưới) -->
+    <img class="welcome-bg-image" id="couplePhoto" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80" alt="Couple">
+
     <div class="welcome-card">
-      <div class="photo-frame" onclick="document.getElementById('photoInput').click()">
-        <img id="couplePhoto" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=400&q=80" alt="Couple">
-        <div class="photo-upload-hint"><i class="fas fa-camera"></i><span>Đổi ảnh hai đứa</span></div>
-      </div>
-      <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(event)">
-      
       <h2>Happy International Men's Day 19/11! ❤️❤️</h2>
-      <p style="margin-top: 10px; opacity: 0.9;">Gửi tặng Akuma của em :33</p>
+      <p style="margin-top: 12px; opacity: 0.95; font-size: 1.1rem;">Gửi tặng Akuma của em :33</p>
       
       <button class="btn-start" onclick="startExperience()">
-        <i class="fas fa-heart"></i> Baby ấn đây nhaaaaa
+        <i class="fas fa-heart"></i> MỞ QUÀ & LẮNG NGHE EM HÁT
       </button>
     </div>
   </div>
@@ -536,7 +508,7 @@
     </div>
 
     <footer>
-      Crafted with ❤️ for my Liverpool Fan | Happy International Men's Day 19/11
+      Crafted with ❤️ for my Liverpool Fan | Happy Men's Day 19/11
     </footer>
   </div>
 
@@ -544,7 +516,7 @@
   <div class="modal" id="letterModal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeLetter()">&times;</span>
-      <div class="letter-title">❤️ Gửi Akuma Của Em ❤️</div>
+      <div class="letter-title">❤️ Gửi Thuyền Trưởng Của Em ❤️</div>
       <div class="letter-body">
 Chủ nhật, ngày 19/11 - Ngày Quốc tế Nam giới!
 
@@ -563,8 +535,13 @@ Love you 3000! 🔴⚽❤️
     // Link audio giọng hát của bạn (Thay link mp3 của bạn vào đây)
     const AUDIO_URL = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; 
     
+    // Link ảnh của hai bạn (Thay link ảnh hai đứa vào đây)
+    const MY_PHOTO_URL = "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80";
+
     const audio = document.getElementById('bgAudio');
     audio.src = AUDIO_URL;
+
+    document.getElementById('couplePhoto').src = MY_PHOTO_URL;
 
     let isPlaying = false;
     let loveScore = 50;
@@ -605,11 +582,6 @@ Love you 3000! 🔴⚽❤️
       } else {
         playAudio();
       }
-    }
-
-    function loadPhoto(event) {
-      const image = document.getElementById('couplePhoto');
-      image.src = URL.createObjectURL(event.target.files[0]);
     }
 
     function addLove() {
