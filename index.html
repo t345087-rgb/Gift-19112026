@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>You'll Never Walk Alone - Happy 19/11!</title>
+  <title>Happy International Men's Day 19/11!</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
@@ -11,9 +11,7 @@
       --lfc-red: #c8102e;
       --lfc-dark-red: #8b0000;
       --lfc-gold: #f6eb61;
-      --lfc-green: #00b2a9;
-      --bg-dark: #0f172a;
-      --card-bg: rgba(255, 255, 255, 0.95);
+      --pink-accent: #ff4d6d;
     }
 
     * {
@@ -24,7 +22,7 @@
     }
 
     body {
-      background: linear-gradient(rgba(15, 0, 3, 0.8), rgba(26, 2, 5, 0.88)), 
+      background: linear-gradient(rgba(15, 0, 3, 0.82), rgba(26, 2, 5, 0.9)), 
                   url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
       background-size: cover;
       color: #333;
@@ -130,17 +128,20 @@
       color: white;
       border: 2px solid var(--lfc-gold);
       padding: 12px 30px;
-      font-size: 1.1rem;
-      font-weight: bold;
+      font-size: 1.2rem;
       border-radius: 50px;
       cursor: pointer;
       margin-top: 20px;
       box-shadow: 0 5px 15px rgba(200, 16, 46, 0.6);
       transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
     }
 
     .btn-start:hover {
-      transform: scale(1.05);
+      transform: scale(1.08);
       box-shadow: 0 8px 25px rgba(246, 235, 97, 0.7);
     }
 
@@ -169,40 +170,46 @@
       opacity: 0.9;
     }
 
-    /* Quick Actions Navigation */
+    /* Grid Nút Bấm Điều Hướng */
     .nav-buttons {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 15px;
-      margin: 40px 0;
+      margin: 35px 0;
     }
 
     .nav-btn {
-      background: rgba(30, 0, 4, 0.7);
+      background: rgba(30, 0, 4, 0.75);
       border: 1px solid rgba(255, 255, 255, 0.3);
       color: white;
-      padding: 18px 10px;
+      padding: 16px 12px;
       border-radius: 16px;
       backdrop-filter: blur(10px);
       cursor: pointer;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      font-size: 1.05rem;
+      gap: 8px;
+      font-size: 1rem;
       font-weight: 600;
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
+    .nav-btn i {
+      font-size: 1.4rem;
+      color: var(--lfc-gold);
+    }
+
     .nav-btn:hover {
       background: var(--lfc-red);
       border-color: var(--lfc-gold);
-      transform: translateY(-3px);
+      transform: translateY(-4px);
       box-shadow: 0 8px 20px rgba(200, 16, 46, 0.5);
     }
 
-    /* Modals System (Popup cho từng mục) */
+    /* System Modals (Popups) */
     .modal {
       display: none;
       position: fixed;
@@ -212,17 +219,17 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(6px);
     }
 
     .modal-content {
-      background: rgba(30, 0, 4, 0.92);
+      background: rgba(30, 0, 4, 0.94);
       border: 2px solid var(--lfc-gold);
       color: #fff;
       border-radius: 20px;
       max-width: 550px;
       width: 100%;
-      padding: 30px;
+      padding: 30px 25px;
       position: relative;
       max-height: 85vh;
       overflow-y: auto;
@@ -245,7 +252,7 @@
 
     .modal-title {
       color: var(--lfc-gold);
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       margin-bottom: 20px;
       text-align: center;
       display: flex;
@@ -261,57 +268,121 @@
       color: #f1f5f9;
     }
 
-    /* VIP Matchday Tickets Flip Grid */
-    .tickets-grid {
+    /* Album Ảnh Polaroid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .polaroid-card {
+      background: #fff;
+      padding: 10px 10px 15px;
+      border-radius: 8px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+      transform: rotate(-2deg);
+      transition: transform 0.3s;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .polaroid-card:nth-child(even) {
+      transform: rotate(3deg);
+    }
+
+    .polaroid-card:hover {
+      transform: scale(1.05) rotate(0deg);
+      z-index: 5;
+    }
+
+    .polaroid-card img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .polaroid-caption {
+      color: #333;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    /* Thẻ Nguyện Ước Grid */
+    .wish-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px;
       margin-top: 15px;
     }
 
-    .ticket-card {
-      height: 150px;
-      perspective: 1000px;
-      cursor: pointer;
-    }
-
-    .ticket-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-    }
-
-    .ticket-card.flipped .ticket-inner {
-      transform: rotateY(180deg);
-    }
-
-    .ticket-front, .ticket-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
+    .wish-card {
+      background: linear-gradient(135deg, rgba(200, 16, 46, 0.8), rgba(139, 0, 0, 0.9));
+      border: 1px dashed var(--lfc-gold);
       border-radius: 15px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      padding: 20px 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
     }
 
-    .ticket-front {
-      background: linear-gradient(135deg, var(--lfc-red), var(--lfc-dark-red));
-      border: 2px dashed var(--lfc-gold);
-      color: white;
+    .wish-card:hover {
+      transform: translateY(-50px) scale(1.03);
+      border-style: solid;
+      background: linear-gradient(135deg, #e63946, var(--lfc-red));
     }
 
-    .ticket-back {
-      background: linear-gradient(135deg, #111, #222);
-      border: 2px solid var(--lfc-gold);
+    .wish-card i {
+      font-size: 1.8rem;
       color: var(--lfc-gold);
-      transform: rotateY(180deg);
+      margin-bottom: 10px;
+    }
+
+    .wish-card h4 {
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .wish-card p {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    /* Quiz Container */
+    .quiz-box {
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 10px;
+    }
+
+    .quiz-question {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--lfc-gold);
+      margin-bottom: 15px;
+    }
+
+    .quiz-btn {
+      width: 100%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      text-align: left;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+
+    .quiz-btn:hover {
+      background: rgba(200, 16, 46, 0.8);
+      border-color: var(--lfc-gold);
     }
 
     /* MVP List */
@@ -362,7 +433,8 @@
       <p style="margin-top: 12px; opacity: 0.95; font-size: 1.1rem;">Gửi tặng Akuma của em :33</p>
       
       <button class="btn-start" onclick="startExperience()">
-        Bất ngờ nèee
+        <i class="fas fa-heart" style="color: #007bff;"></i>
+        <i class="fas fa-heart" style="color: #ff4d6d;"></i>
       </button>
     </div>
   </div>
@@ -370,15 +442,36 @@
   <!-- Main Website Content -->
   <div class="container">
     <header>
-      <h1>YOU'LL NEVER WALK ALONE</h1>
-      <p>...Because I'm Always With You! ❤️❤️❤️</p>
+      <h1>ALWAYS BY YOUR SIDE</h1>
+      <p>...Because I Love You So Much! ❤️❤️❤️</p>
     </header>
 
-    <!-- Các Nút Chọn Mục (Chạm vào mục nào mới hiện mục đó) -->
+    <!-- Navigation Grid Buttons -->
     <div class="nav-buttons">
-      <button class="nav-btn" onclick="openModal('letterModal')"><i class="fas fa-envelope-open-text"></i> Thư Tình</button>
-      <button class="nav-btn" onclick="openModal('ticketsModal')"><i class="fas fa-ticket-alt"></i> Vé Đổi Quà VIP</button>
-      <button class="nav-btn" onclick="openModal('mvpModal')"><i class="fas fa-trophy"></i> Bảng Vinh Danh</button>
+      <button class="nav-btn" onclick="openModal('letterModal')">
+        <i class="fas fa-envelope-open-text"></i>
+        <span>Thư Tình</span>
+      </button>
+
+      <button class="nav-btn" onclick="openModal('galleryModal')">
+        <i class="fas fa-images"></i>
+        <span>Góc Kỷ Niệm</span>
+      </button>
+
+      <button class="nav-btn" onclick="openModal('wishModal')">
+        <i class="fas fa-wand-magic-sparkles"></i>
+        <span>Thẻ Nguyện Ước</span>
+      </button>
+
+      <button class="nav-btn" onclick="openModal('quizModal')">
+        <i class="fas fa-gamepad"></i>
+        <span>Đố Vui Tình Yêu</span>
+      </button>
+
+      <button class="nav-btn" onclick="openModal('mvpModal')">
+        <i class="fas fa-crown"></i>
+        <span>Bảng Vinh Danh</span>
+      </button>
     </div>
 
     <footer>
@@ -396,79 +489,96 @@ Ngày 19/11 - Ngày Quốc tế Nam giới!
 
 Gửi cục cưng của em:333
 
-Cảm ơn anh đã luôn kiên nhẫn, yêu thương, chiều chuộng và chăm sóc em suốt thời gian qua. Giống như khẩu hiệu "You'll Never Walk Alone" của The Kop, em hứa sẽ luôn yêu thương, đồng hành, cổ vũ và ở bên cạnh anh trong mọi chặng đường.
+Cảm ơn anh đã luôn kiên nhẫn, yêu thương, chiều chuộng và chăm sóc em suốt thời gian qua. Em hứa sẽ luôn yêu thương, đồng hành, cổ vũ và ở bên cạnh anh trong mọi chặng đường.
 
-Chúc anh ngày 19/11 thật nhiều niềm vui, luôn mạnh khỏe, hạnh phúc và luôn là tri kỉ của emmmm 💖
+Chúc anh ngày 19/11 thật nhiều niềm vui, luôn mạnh khỏe, hạnh phúc và luôn là tri kỷ của emmmm 💖
 
 I love you nhăm nhăm ❤️💙
       </div>
     </div>
   </div>
 
-  <!-- 2. POPUP VÉ ĐỔI QUÀ VIP -->
-  <div class="modal" id="ticketsModal">
+  <!-- 2. POPUP GÓC KỶ NIỆM (ALBUM POLAROID) -->
+  <div class="modal" id="galleryModal">
     <div class="modal-content">
-      <span class="close-modal" onclick="closeModal('ticketsModal')">&times;</span>
-      <div class="modal-title"><i class="fas fa-ticket-alt"></i> Vé Tình Yêu Matchday VIP</div>
-      <p style="text-align: center; margin-bottom: 15px; opacity: 0.8; font-size: 0.9rem;">(Chạm vào từng tấm vé để lật xem đặc quyền)</p>
+      <span class="close-modal" onclick="closeModal('galleryModal')">&times;</span>
+      <div class="modal-title"><i class="fas fa-images"></i> Góc Kỷ Niệm Của Chúng Mình</div>
+      <p style="text-align: center; margin-bottom: 15px; opacity: 0.8; font-size: 0.9rem;">(Thay đường dẫn ảnh của hai bạn vào mã nguồn nhé)</p>
       
-      <div class="tickets-grid">
-        <div class="ticket-card" onclick="flipTicket(this)">
-          <div class="ticket-inner">
-            <div class="ticket-front">
-              <h3>TẤM VÉ #01</h3>
-              <p style="margin-top: 8px; font-size: 0.85rem;">VIP Matchday Pass 🏆</p>
-            </div>
-            <div class="ticket-back">
-              <h4>ĐẶC QUYỀN #01</h4>
-              <p style="margin-top: 8px; font-size: 0.8rem;">Toàn quyền xem bóng đá đêm không bị làm phiền + Có đồ ăn kèm!</p>
-            </div>
-          </div>
+      <div class="gallery-grid">
+        <div class="polaroid-card">
+          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80" alt="Photo 1">
+          <div class="polaroid-caption">Lần hẹn hò #1 ❤️</div>
         </div>
-
-        <div class="ticket-card" onclick="flipTicket(this)">
-          <div class="ticket-inner">
-            <div class="ticket-front">
-              <h3>TẤM VÉ #02</h3>
-              <p style="margin-top: 8px; font-size: 0.85rem;">Thẻ Miễn Phạt 💛</p>
-            </div>
-            <div class="ticket-back">
-              <h4>ĐẶC QUYỀN #02</h4>
-              <p style="margin-top: 8px; font-size: 0.8rem;">Dùng để xoá giải án phạt mỗi khi anh lỡ làm em giận!</p>
-            </div>
-          </div>
+        <div class="polaroid-card">
+          <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80" alt="Photo 2">
+          <div class="polaroid-caption">Chuyến đi xa 🌊</div>
         </div>
-
-        <div class="ticket-card" onclick="flipTicket(this)">
-          <div class="ticket-inner">
-            <div class="ticket-front">
-              <h3>TẤM VÉ #03</h3>
-              <p style="margin-top: 8px; font-size: 0.85rem;">Massage & Spa 💆‍♂️</p>
-            </div>
-            <div class="ticket-back">
-              <h4>ĐẶC QUYỀN #03</h4>
-              <p style="margin-top: 8px; font-size: 0.8rem;">1 Suất Massage đấm lưng thư giãn 30 phút từ em!</p>
-            </div>
-          </div>
+        <div class="polaroid-card">
+          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80" alt="Photo 3">
+          <div class="polaroid-caption">Khoảnh khắc ngọt ngào ✨</div>
         </div>
-
-        <div class="ticket-card" onclick="flipTicket(this)">
-          <div class="ticket-inner">
-            <div class="ticket-front">
-              <h3>TẤM VÉ #04</h3>
-              <p style="margin-top: 8px; font-size: 0.85rem;">Chef Special 🍲</p>
-            </div>
-            <div class="ticket-back">
-              <h4>ĐẶC QUYỀN #04</h4>
-              <p style="margin-top: 8px; font-size: 0.8rem;">Yêu cầu em nấu bất kỳ món ăn nào anh thích!</p>
-            </div>
-          </div>
+        <div class="polaroid-card">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" alt="Photo 4">
+          <div class="polaroid-caption">Bên nhau bình yên 💖</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 3. POPUP BẢNG VINH DANH MVP -->
+  <!-- 3. POPUP THẺ NGUYỆN ƯỚC -->
+  <div class="modal" id="wishModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('wishModal')">&times;</span>
+      <div class="modal-title"><i class="fas fa-wand-magic-sparkles"></i> Thẻ Nguyện Ước Tình Yêu</div>
+      <p style="text-align: center; margin-bottom: 15px; opacity: 0.8; font-size: 0.9rem;">(Anh được sử dụng các thẻ này bất cứ lúc nào!)</p>
+
+      <div class="wish-grid">
+        <div class="wish-card" onclick="fireWishConfetti()">
+          <i class="fas fa-utensils"></i>
+          <h4>Bữa Ăn Ngon Lành</h4>
+          <p>Yêu cầu em nấu bất kỳ món ăn nào anh thèm!</p>
+        </div>
+
+        <div class="wish-card" onclick="fireWishConfetti()">
+          <i class="fas fa-smile-beam"></i>
+          <h4>Thẻ Miễn Phạt</h4>
+          <p>Xoá án dỗi ngay lập tức không cần lý do!</p>
+        </div>
+
+        <div class="wish-card" onclick="fireWishConfetti()">
+          <i class="fas fa-hand-holding-heart"></i>
+          <h4>Suất Massage 30 Phút</h4>
+          <p>Em đấm lưng, mát-xa thư giãn cho anh sau ngày mệt mỏi.</p>
+        </div>
+
+        <div class="wish-card" onclick="fireWishConfetti()">
+          <i class="fas fa-car-side"></i>
+          <h4>Buổi Hẹn Hò Bất Ngờ</h4>
+          <p>Em sẽ là người lên kế hoạch đi chơi từ A-Z!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. POPUP TRẮC NGHIỆM TÌNH YÊU -->
+  <div class="modal" id="quizModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('quizModal')">&times;</span>
+      <div class="modal-title"><i class="fas fa-gamepad"></i> Đố Vui Về Chúng Mình</div>
+      
+      <div class="quiz-box">
+        <div class="quiz-question" id="quizQuestion">Câu 1: Ai là người dễ thương nhất trong lòng em?</div>
+        <div id="quizAnswers">
+          <button class="quiz-btn" onclick="checkAnswer(true)">A. Chắc chắn là Monkey D. Anh rồi! ❤️</button>
+          <button class="quiz-btn" onclick="checkAnswer(false)">B. Một ai đó khác...</button>
+        </div>
+        <p id="quizFeedback" style="margin-top: 10px; font-weight: bold; color: var(--lfc-gold); text-align: center;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. POPUP BẢNG VINH DANH MVP -->
   <div class="modal" id="mvpModal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeModal('mvpModal')">&times;</span>
@@ -495,7 +605,7 @@ I love you nhăm nhăm ❤️💙
 
     // Gán ảnh nền cho toàn bộ trang web
     document.getElementById('couplePhoto').src = MY_PHOTO_URL;
-    document.body.style.backgroundImage = `linear-gradient(rgba(15, 0, 3, 0.8), rgba(26, 2, 5, 0.88)), url('${MY_PHOTO_URL}')`;
+    document.body.style.backgroundImage = `linear-gradient(rgba(15, 0, 3, 0.82), rgba(26, 2, 5, 0.9)), url('${MY_PHOTO_URL}')`;
 
     let isPlaying = false;
 
@@ -535,16 +645,6 @@ I love you nhăm nhăm ❤️💙
       }
     }
 
-    function flipTicket(card) {
-      card.classList.toggle('flipped');
-      confetti({
-        particleCount: 20,
-        spread: 40,
-        origin: { y: 0.8 }
-      });
-    }
-
-    // Hàm mở popup
     function openModal(id) {
       document.getElementById(id).style.display = 'flex';
       confetti({
@@ -554,9 +654,30 @@ I love you nhăm nhăm ❤️💙
       });
     }
 
-    // Hàm đóng popup
     function closeModal(id) {
       document.getElementById(id).style.display = 'none';
+    }
+
+    function fireWishConfetti() {
+      confetti({
+        particleCount: 40,
+        spread: 50,
+        origin: { y: 0.7 }
+      });
+    }
+
+    function checkAnswer(isCorrect) {
+      const feedback = document.getElementById('quizFeedback');
+      if(isCorrect) {
+        feedback.innerText = "Chính xác 1000%! Yêu anh nhất trên đời ❤️✨";
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      } else {
+        feedback.innerText = "Sai rồi nha, chọn lại đi nào! 😜";
+      }
     }
   </script>
 </body>
