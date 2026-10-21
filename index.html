@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You'll Never Walk Alone - Happy 19/11!</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --lfc-red: #c8102e;
+      --lfc-dark-red: #8b0000;
+      --lfc-gold: #f6eb61;
+      --lfc-green: #00b2a9;
+      --bg-dark: #0f172a;
+      --card-bg: rgba(255, 255, 255, 0.95);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a0205 0%, #3a0007 50%, #0f0003 100%);
+      color: #333;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 60px;
+    }
+
+    /* Floating Music Control */
+    .music-control-floating {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: rgba(200, 16, 46, 0.9);
+      backdrop-filter: blur(8px);
+      padding: 8px 15px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .disc-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #111;
+      border: 2px solid var(--lfc-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .disc-spinning {
+      animation: spin 3s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .btn-music {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    /* Overlay Welcome Modal */
+    .welcome-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .welcome-card {
+      background: linear-gradient(145deg, #1e0004, #4a000a);
+      border: 2px solid var(--lfc-gold);
+      border-radius: 20px;
+      padding: 30px 20px;
+      max-width: 420px;
+      width: 100%;
+      color: white;
+      box-shadow: 0 10px 40px rgba(200, 16, 46, 0.5);
+    }
+
+    .photo-frame {
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      border: 4px solid var(--lfc-gold);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 20px rgba(246, 235, 97, 0.4);
+      cursor: pointer;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-upload-hint {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: 0.3s;
+      font-size: 12px;
+    }
+
+    .photo-frame:hover .photo-upload-hint {
+      opacity: 1;
+    }
+
+    .btn-start {
+      background: linear-gradient(45deg, var(--lfc-red), #e63946);
+      color: white;
+      border: 2px solid var(--lfc-gold);
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 5px 15px rgba(200, 16, 46, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-start:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(246, 235, 97, 0.5);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 10px 20px;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      color: var(--lfc-gold);
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(246, 235, 97, 0.3);
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Quick Actions Navigation */
+    .nav-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 25px 0;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 12px;
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: var(--lfc-red);
+      border-color: var(--lfc-gold);
+    }
+
+    /* Love Meter Section */
+    .section-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      color: white;
+    }
+
+    .section-title {
+      color: var(--lfc-gold);
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress-bar-bg {
+      background: rgba(255, 255, 255, 0.2);
+      height: 24px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 15px 0;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      background: linear-gradient(90deg, #ff4d6d, var(--lfc-red), var(--lfc-gold));
+      height: 100%;
+      width: 50%;
+      border-radius: 12px;
+      transition: width 0.4s ease;
+    }
+
+    .progress-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+
+    .btn-heart {
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      display: block;
+      margin: 10px auto 0;
+      transition: 0.2s;
+    }
+
+    .btn-heart:active {
+      transform: scale(0.95);
+    }
+
+    /* VIP Matchday Tickets Flip Grid */
+    .tickets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .ticket-card {
+      height: 160px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .ticket-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .ticket-card.flipped .ticket-inner {
+      transform: rotateY(180deg);
+    }
+
+    .ticket-front, .ticket-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ticket-front {
+      background: linear-gradient(135deg, var(--lfc-red), var(--lfc-dark-red));
+      border: 2px dashed var(--lfc-gold);
+      color: white;
+    }
+
+    .ticket-back {
+      background: linear-gradient(135deg, #111, #222);
+      border: 2px solid var(--lfc-gold);
+      color: var(--lfc-gold);
+      transform: rotateY(180deg);
+    }
+
+    /* MVP List */
+    .mvp-list {
+      list-style: none;
+    }
+
+    .mvp-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mvp-item i {
+      color: var(--lfc-gold);
+    }
+
+    /* Letter Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 3000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #fff;
+      color: #222;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      padding: 30px;
+      position: relative;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .letter-title {
+      color: var(--lfc-red);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .letter-body {
+      line-height: 1.7;
+      font-size: 1rem;
+      white-space: pre-line;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Music Bar -->
+  <div class="music-control-floating">
+    <div class="disc-icon" id="discIcon"><i class="fas fa-music"></i></div>
+    <button class="btn-music" id="playBtn" onclick="togglePlay()"><i class="fas fa-play"></i></button>
+    <audio id="bgAudio" loop></audio>
+  </div>
+
+  <!-- Welcome Screen Overlay -->
+  <div class="welcome-overlay" id="welcomeOverlay">
+    <div class="welcome-card">
+      <div class="photo-frame" onclick="document.getElementById('photoInput').click()">
+        <img id="couplePhoto" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=400&q=80" alt="Couple">
+        <div class="photo-upload-hint"><i class="fas fa-camera"></i><span>Đổi ảnh hai đứa</span></div>
+      </div>
+      <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(event)">
+      
+      <h2>Happy International Men's Day 19/11! ❤️❤️</h2>
+      <p style="margin-top: 10px; opacity: 0.9;">Gửi tặng Akuma của em :33</p>
+      
+      <button class="btn-start" onclick="startExperience()">
+        <i class="fas fa-heart"></i> MỞ QUÀ & LẮNG NGHE EM HÁT
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Website Content -->
+  <div class="container">
+    <header>
+      <h1>YOU'LL NEVER WALK ALONE</h1>
+      <p>...Because I'm Always With You! ❤️</p>
+    </header>
+
+    <!-- Quick Actions -->
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="openLetter()"><i class="fas fa-envelope-open-text"></i> Đọc Thư Tình</button>
+      <button class="nav-btn" onclick="scrollToSection('ticketsSection')"><i class="fas fa-ticket-alt"></i> Vé Đổi Quà VIP</button>
+      <button class="nav-btn" onclick="scrollToSection('mvpSection')"><i class="fas fa-trophy"></i> Bảng Vinh Danh MVP</button>
+      <button class="nav-btn" onclick="scrollToSection('loveMeterSection')"><i class="fas fa-fire"></i> Thước Đo Tình Yêu</button>
+    </div>
+
+    <!-- Love Meter Section -->
+    <div class="section-card" id="loveMeterSection">
+      <div class="section-title"><i class="fas fa-heartbeat"></i> Thước Đo Điểm Đáng Yêu</div>
+      <p>Bấm tim để nạp đầy năng lượng chiến thắng cho anh nhé!</p>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="loveFill"></div>
+        <div class="progress-text" id="loveText">50% MATCHDAY POWER</div>
+      </div>
+      <button class="btn-heart" onclick="addLove()"><i class="fas fa-heart"></i> Bấm Thả Tim (+10%)</button>
+    </div>
+
+    <!-- VIP Matchday Tickets Section -->
+    <div class="section-card" id="ticketsSection">
+      <div class="section-title"><i class="fas fa-ticket-alt"></i> Vé Tình Yêu Matchday VIP (Chạm để lật)</div>
+      <div class="tickets-grid">
+        <div class="ticket-card" onclick="flipTicket(this)">
+          <div class="ticket-inner">
+            <div class="ticket-front">
+              <h3>TẤM VÉ #01</h3>
+              <p style="margin-top: 8px;">VIP Matchday Pass 🏆</p>
+            </div>
+            <div class="ticket-back">
+              <h4>ĐẶC QUYỀN #01</h4>
+              <p style="margin-top: 8px; font-size: 0.9rem;">Toàn quyền xem bóng đá đêm không bị làm phiền + Có đồ ăn kèm!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ticket-card" onclick="flipTicket(this)">
+          <div class="ticket-inner">
+            <div class="ticket-front">
+              <h3>TẤM VÉ #02</h3>
+              <p style="margin-top: 8px;">Thẻ Miễn Phạt 💛</p>
+            </div>
+            <div class="ticket-back">
+              <h4>ĐẶC QUYỀN #02</h4>
+              <p style="margin-top: 8px; font-size: 0.9rem;">Dùng để xoá giải án phạt mỗi khi anh lỡ làm em giận!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ticket-card" onclick="flipTicket(this)">
+          <div class="ticket-inner">
+            <div class="ticket-front">
+              <h3>TẤM VÉ #03</h3>
+              <p style="margin-top: 8px;">Massage & Spa 💆‍♂️</p>
+            </div>
+            <div class="ticket-back">
+              <h4>ĐẶC QUYỀN #03</h4>
+              <p style="margin-top: 8px; font-size: 0.9rem;">1 Suất Massage đấm lưng thư giãn 30 phút từ em!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ticket-card" onclick="flipTicket(this)">
+          <div class="ticket-inner">
+            <div class="ticket-front">
+              <h3>TẤM VÉ #04</h3>
+              <p style="margin-top: 8px;">Chef Special 🍲</p>
+            </div>
+            <div class="ticket-back">
+              <h4>ĐẶC QUYỀN #04</h4>
+              <p style="margin-top: 8px; font-size: 0.9rem;">Yêu cầu em nấu bất kỳ món ăn nào anh thích!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MVP Reasons Section -->
+    <div class="section-card" id="mvpSection">
+      <div class="section-title"><i class="fas fa-crown"></i> Vì Sao Anh Là MVP Của Em?</div>
+      <ul class="mvp-list">
+        <li class="mvp-item"><i class="fas fa-star"></i> <span>Luôn luôn lắng nghe và cưng chiều em hết mực.</span></li>
+        <li class="mvp-item"><i class="fas fa-star"></i> <span>Đam mê bóng đá nhưng vẫn đặt em ở vị trí số 1.</span></li>
+        <li class="mvp-item"><i class="fas fa-star"></i> <span>Là chỗ dựa ấm áp và bình yên nhất cho em.</span></li>
+        <li class="mvp-item"><i class="fas fa-star"></i> <span>Chỉ cần có anh bên cạnh, ngày nào cũng là ngày tuyệt vời!</span></li>
+      </ul>
+    </div>
+
+    <footer>
+      Crafted with ❤️ for my Liverpool Fan | Happy Men's Day 19/11
+    </footer>
+  </div>
+
+  <!-- Love Letter Modal -->
+  <div class="modal" id="letterModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeLetter()">&times;</span>
+      <div class="letter-title">❤️ Gửi Thuyền Trưởng Của Em ❤️</div>
+      <div class="letter-body">
+Chủ nhật, ngày 19/11 - Ngày Quốc tế Nam giới!
+
+Gửi anh - fan hâm mộ nhiệt thành nhất của Liverpool và cũng là "cầu thủ xuất sắc nhất" trong lòng em!
+
+Cảm ơn anh đã luôn kiên nhẫn, yêu thương và chăm sóc em suốt thời gian qua. Giống như khẩu hiệu "You'll Never Walk Alone" của The Kop, em hứa sẽ luôn đồng hành, cổ vũ và ở bên cạnh anh trong mọi chặng đường.
+
+Chúc anh ngày 19/11 thật nhiều niềm vui, luôn mạnh khỏe, phong độ và đội bóng anh yêu thích luôn giành chiến thắng!
+
+Love you 3000! 🔴⚽❤️
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Link audio giọng hát của bạn (Thay link mp3 của bạn vào đây)
+    const AUDIO_URL = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; 
+    
+    const audio = document.getElementById('bgAudio');
+    audio.src = AUDIO_URL;
+
+    let isPlaying = false;
+    let loveScore = 50;
+
+    function startExperience() {
+      document.getElementById('welcomeOverlay').style.opacity = '0';
+      setTimeout(() => {
+        document.getElementById('welcomeOverlay').style.visibility = 'hidden';
+      }, 500);
+
+      // Play Audio
+      playAudio();
+
+      // Fire Confetti
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+
+    function playAudio() {
+      audio.play().then(() => {
+        isPlaying = true;
+        document.getElementById('playBtn').innerHTML = '<i class="fas fa-pause"></i>';
+        document.getElementById('discIcon').classList.add('disc-spinning');
+      }).catch(err => {
+        console.log("Audio play blocked: ", err);
+      });
+    }
+
+    function togglePlay() {
+      if (isPlaying) {
+        audio.pause();
+        isPlaying = false;
+        document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i>';
+        document.getElementById('discIcon').classList.remove('disc-spinning');
+      } else {
+        playAudio();
+      }
+    }
+
+    function loadPhoto(event) {
+      const image = document.getElementById('couplePhoto');
+      image.src = URL.createObjectURL(event.target.files[0]);
+    }
+
+    function addLove() {
+      if (loveScore < 100) {
+        loveScore += 10;
+        if (loveScore > 100) loveScore = 100;
+        document.getElementById('loveFill').style.width = loveScore + '%';
+        document.getElementById('loveText').innerText = loveScore + '% MATCHDAY POWER';
+        
+        confetti({
+          particleCount: 30,
+          spread: 50,
+          origin: { y: 0.7 }
+        });
+      }
+    }
+
+    function flipTicket(card) {
+      card.classList.toggle('flipped');
+      confetti({
+        particleCount: 20,
+        spread: 40,
+        origin: { y: 0.8 }
+      });
+    }
+
+    function openLetter() {
+      document.getElementById('letterModal').style.display = 'flex';
+      confetti({
+        particleCount: 80,
+        spread: 60,
+        origin: { y: 0.5 }
+      });
+    }
+
+    function closeLetter() {
+      document.getElementById('letterModal').style.display = 'none';
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
