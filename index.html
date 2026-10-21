@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy International Men's Day 19/11!</title>
+  <title>You'll Never Walk Alone - Happy 19/11!</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
@@ -182,7 +182,7 @@
       background: rgba(30, 0, 4, 0.75);
       border: 1px solid rgba(255, 255, 255, 0.3);
       color: white;
-      padding: 16px 12px;
+      padding: 18px 12px;
       border-radius: 16px;
       backdrop-filter: blur(10px);
       cursor: pointer;
@@ -310,7 +310,7 @@
       margin-top: 8px;
     }
 
-    /* Thẻ Nguyện Ước Grid */
+    /* Thẻ Nguyện Ước Grid & Flip Mechanics */
     .wish-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -319,70 +319,61 @@
     }
 
     .wish-card {
-      background: linear-gradient(135deg, rgba(200, 16, 46, 0.8), rgba(139, 0, 0, 0.9));
-      border: 1px dashed var(--lfc-gold);
-      border-radius: 15px;
-      padding: 20px 15px;
-      text-align: center;
+      height: 150px;
+      perspective: 1000px;
       cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
     }
 
-    .wish-card:hover {
-      transform: translateY(-50px) scale(1.03);
-      border-style: solid;
-      background: linear-gradient(135deg, #e63946, var(--lfc-red));
-    }
-
-    .wish-card i {
-      font-size: 1.8rem;
-      color: var(--lfc-gold);
-      margin-bottom: 10px;
-    }
-
-    .wish-card h4 {
-      font-size: 1.05rem;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-
-    .wish-card p {
-      font-size: 0.85rem;
-      opacity: 0.9;
-    }
-
-    /* Quiz Container */
-    .quiz-box {
-      background: rgba(255,255,255,0.05);
-      border-radius: 15px;
-      padding: 20px;
-      margin-top: 10px;
-    }
-
-    .quiz-question {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--lfc-gold);
-      margin-bottom: 15px;
-    }
-
-    .quiz-btn {
+    .wish-inner {
+      position: relative;
       width: 100%;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: white;
-      padding: 12px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      text-align: left;
-      font-size: 0.95rem;
-      transition: 0.2s;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
     }
 
-    .quiz-btn:hover {
-      background: rgba(200, 16, 46, 0.8);
-      border-color: var(--lfc-gold);
+    .wish-card.selected .wish-inner {
+      transform: rotateY(180deg);
+    }
+
+    .wish-front, .wish-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .wish-front {
+      background: linear-gradient(135deg, rgba(200, 16, 46, 0.9), rgba(139, 0, 0, 0.95));
+      border: 2px dashed var(--lfc-gold);
+      color: white;
+    }
+
+    .wish-front i {
+      font-size: 2rem;
+      color: var(--lfc-gold);
+      margin-bottom: 8px;
+    }
+
+    .wish-back {
+      background: linear-gradient(135deg, #111, #222);
+      border: 2px solid var(--lfc-gold);
+      color: var(--lfc-gold);
+      transform: rotateY(180deg);
+    }
+
+    .wish-card.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+      filter: grayscale(0.8);
     }
 
     /* MVP List */
@@ -442,8 +433,8 @@
   <!-- Main Website Content -->
   <div class="container">
     <header>
-      <h1>ALWAYS BY YOUR SIDE</h1>
-      <p>...Because I Love You So Much! ❤️❤️❤️</p>
+      <h1>YOU'LL NEVER WALK ALONE</h1>
+      <p>...Because I'm Always With You! ❤️❤️❤️</p>
     </header>
 
     <!-- Navigation Grid Buttons -->
@@ -461,11 +452,6 @@
       <button class="nav-btn" onclick="openModal('wishModal')">
         <i class="fas fa-wand-magic-sparkles"></i>
         <span>Thẻ Nguyện Ước</span>
-      </button>
-
-      <button class="nav-btn" onclick="openModal('quizModal')">
-        <i class="fas fa-gamepad"></i>
-        <span>Đố Vui Tình Yêu</span>
       </button>
 
       <button class="nav-btn" onclick="openModal('mvpModal')">
@@ -489,7 +475,7 @@ Ngày 19/11 - Ngày Quốc tế Nam giới!
 
 Gửi cục cưng của em:333
 
-Cảm ơn anh đã luôn kiên nhẫn, yêu thương, chiều chuộng và chăm sóc em suốt thời gian qua. Em hứa sẽ luôn yêu thương, đồng hành, cổ vũ và ở bên cạnh anh trong mọi chặng đường.
+Cảm ơn anh đã luôn kiên nhẫn, yêu thương, chiều chuộng và chăm sóc em suốt thời gian qua. Giống như khẩu hiệu "You'll Never Walk Alone" của The Kop, em hứa sẽ luôn yêu thương, đồng hành, cổ vũ và ở bên cạnh anh trong mọi chặng đường.
 
 Chúc anh ngày 19/11 thật nhiều niềm vui, luôn mạnh khỏe, hạnh phúc và luôn là tri kỷ của emmmm 💖
 
@@ -526,59 +512,80 @@ I love you nhăm nhăm ❤️💙
     </div>
   </div>
 
-  <!-- 3. POPUP THẺ NGUYỆN ƯỚC -->
+  <!-- 3. POPUP THẺ NGUYỆN ƯỚC (CHỈ ĐƯỢC CHỌN 1) -->
   <div class="modal" id="wishModal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeModal('wishModal')">&times;</span>
       <div class="modal-title"><i class="fas fa-wand-magic-sparkles"></i> Thẻ Nguyện Ước Tình Yêu</div>
-      <p style="text-align: center; margin-bottom: 15px; opacity: 0.8; font-size: 0.9rem;">(Anh được sử dụng các thẻ này bất cứ lúc nào!)</p>
+      <p id="wishStatusText" style="text-align: center; margin-bottom: 15px; color: var(--lfc-gold); font-weight: bold; font-size: 0.95rem;">
+        🎁 Anh chỉ được chọn duy nhất 1 trong 4 thẻ ước nguyện!
+      </p>
 
-      <div class="wish-grid">
-        <div class="wish-card" onclick="fireWishConfetti()">
-          <i class="fas fa-utensils"></i>
-          <h4>Bữa Ăn Ngon Lành</h4>
-          <p>Yêu cầu em nấu bất kỳ món ăn nào anh thèm!</p>
+      <div class="wish-grid" id="wishGridContainer">
+        <!-- Thẻ 1 -->
+        <div class="wish-card" onclick="selectWishCard(this)">
+          <div class="wish-inner">
+            <div class="wish-front">
+              <i class="fas fa-gift"></i>
+              <h3>THẺ #01</h3>
+              <p style="margin-top: 5px; font-size: 0.8rem;">Chạm để lật</p>
+            </div>
+            <div class="wish-back">
+              <h4>BỮA ĂN NGON LÀNH 🍲</h4>
+              <p style="margin-top: 8px; font-size: 0.85rem;">Yêu cầu em nấu bất kỳ món ăn nào anh thèm!</p>
+            </div>
+          </div>
         </div>
 
-        <div class="wish-card" onclick="fireWishConfetti()">
-          <i class="fas fa-smile-beam"></i>
-          <h4>Thẻ Miễn Phạt</h4>
-          <p>Xoá án dỗi ngay lập tức không cần lý do!</p>
+        <!-- Thẻ 2 -->
+        <div class="wish-card" onclick="selectWishCard(this)">
+          <div class="wish-inner">
+            <div class="wish-front">
+              <i class="fas fa-gift"></i>
+              <h3>THẺ #02</h3>
+              <p style="margin-top: 5px; font-size: 0.8rem;">Chạm để lật</p>
+            </div>
+            <div class="wish-back">
+              <h4>THẺ MIỄN PHẠT 💛</h4>
+              <p style="margin-top: 8px; font-size: 0.85rem;">Xoá án dỗi ngay lập tức không cần lý do!</p>
+            </div>
+          </div>
         </div>
 
-        <div class="wish-card" onclick="fireWishConfetti()">
-          <i class="fas fa-hand-holding-heart"></i>
-          <h4>Suất Massage 30 Phút</h4>
-          <p>Em đấm lưng, mát-xa thư giãn cho anh sau ngày mệt mỏi.</p>
+        <!-- Thẻ 3 -->
+        <div class="wish-card" onclick="selectWishCard(this)">
+          <div class="wish-inner">
+            <div class="wish-front">
+              <i class="fas fa-gift"></i>
+              <h3>THẺ #03</h3>
+              <p style="margin-top: 5px; font-size: 0.8rem;">Chạm để lật</p>
+            </div>
+            <div class="wish-back">
+              <h4>SUẤT MASSAGE 💆‍♂️</h4>
+              <p style="margin-top: 8px; font-size: 0.85rem;">Em đấm lưng, mát-xa thư giãn 30 phút cho anh.</p>
+            </div>
+          </div>
         </div>
 
-        <div class="wish-card" onclick="fireWishConfetti()">
-          <i class="fas fa-car-side"></i>
-          <h4>Buổi Hẹn Hò Bất Ngờ</h4>
-          <p>Em sẽ là người lên kế hoạch đi chơi từ A-Z!</p>
+        <!-- Thẻ 4 -->
+        <div class="wish-card" onclick="selectWishCard(this)">
+          <div class="wish-inner">
+            <div class="wish-front">
+              <i class="fas fa-gift"></i>
+              <h3>THẺ #04</h3>
+              <p style="margin-top: 5px; font-size: 0.8rem;">Chạm để lật</p>
+            </div>
+            <div class="wish-back">
+              <h4>HẸN HÒ BẤT NGỜ 🚗</h4>
+              <p style="margin-top: 8px; font-size: 0.85rem;">Em sẽ lên kế hoạch đi chơi từ A-Z cho anh!</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 4. POPUP TRẮC NGHIỆM TÌNH YÊU -->
-  <div class="modal" id="quizModal">
-    <div class="modal-content">
-      <span class="close-modal" onclick="closeModal('quizModal')">&times;</span>
-      <div class="modal-title"><i class="fas fa-gamepad"></i> Đố Vui Về Chúng Mình</div>
-      
-      <div class="quiz-box">
-        <div class="quiz-question" id="quizQuestion">Câu 1: Ai là người dễ thương nhất trong lòng em?</div>
-        <div id="quizAnswers">
-          <button class="quiz-btn" onclick="checkAnswer(true)">A. Chắc chắn là Monkey D. Anh rồi! ❤️</button>
-          <button class="quiz-btn" onclick="checkAnswer(false)">B. Một ai đó khác...</button>
-        </div>
-        <p id="quizFeedback" style="margin-top: 10px; font-weight: bold; color: var(--lfc-gold); text-align: center;"></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5. POPUP BẢNG VINH DANH MVP -->
+  <!-- 4. POPUP BẢNG VINH DANH MVP -->
   <div class="modal" id="mvpModal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeModal('mvpModal')">&times;</span>
@@ -608,6 +615,7 @@ I love you nhăm nhăm ❤️💙
     document.body.style.backgroundImage = `linear-gradient(rgba(15, 0, 3, 0.82), rgba(26, 2, 5, 0.9)), url('${MY_PHOTO_URL}')`;
 
     let isPlaying = false;
+    let hasChosenWish = false;
 
     function startExperience() {
       document.getElementById('welcomeOverlay').style.opacity = '0';
@@ -658,26 +666,27 @@ I love you nhăm nhăm ❤️💙
       document.getElementById(id).style.display = 'none';
     }
 
-    function fireWishConfetti() {
-      confetti({
-        particleCount: 40,
-        spread: 50,
-        origin: { y: 0.7 }
-      });
-    }
+    // Xử lý logic chọn duy nhất 1 thẻ nguyện ước
+    function selectWishCard(selectedCard) {
+      if (hasChosenWish) return;
 
-    function checkAnswer(isCorrect) {
-      const feedback = document.getElementById('quizFeedback');
-      if(isCorrect) {
-        feedback.innerText = "Chính xác 1000%! Yêu anh nhất trên đời ❤️✨";
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
-      } else {
-        feedback.innerText = "Sai rồi nha, chọn lại đi nào! 😜";
-      }
+      hasChosenWish = true;
+      selectedCard.classList.add('selected');
+
+      const allCards = document.querySelectorAll('.wish-card');
+      allCards.forEach(card => {
+        if (card !== selectedCard) {
+          card.classList.add('disabled');
+        }
+      });
+
+      document.getElementById('wishStatusText').innerText = "✨ Anh đã chọn đặc quyền này rồi nhé! ✨";
+
+      confetti({
+        particleCount: 100,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
     }
   </script>
 </body>
