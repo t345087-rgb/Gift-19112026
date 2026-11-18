@@ -23,7 +23,7 @@
 
     body {
       background: linear-gradient(rgba(15, 0, 3, 0.82), rgba(26, 2, 5, 0.9)), 
-                  url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+                  url('anh4.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #333;
       min-height: 100vh;
@@ -412,12 +412,12 @@
   <div class="music-control-floating">
     <div class="disc-icon" id="discIcon"><i class="fas fa-music"></i></div>
     <button class="btn-music" id="playBtn" onclick="togglePlay()"><i class="fas fa-play"></i></button>
-    <audio id="bgAudio" loop></audio>
+    <audio id="bgAudio" loop autoplay></audio>
   </div>
 
   <!-- Welcome Screen Overlay -->
   <div class="welcome-overlay" id="welcomeOverlay">
-    <img class="welcome-bg-image" id="couplePhoto" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80" alt="Couple">
+    <img class="welcome-bg-image" id="couplePhoto" src="anh4.jpg" alt="Couple">
 
     <div class="welcome-card">
       <h2>Happy International Men's Day 19/11! ❤️❤️</h2>
@@ -491,30 +491,25 @@ I love you nhăm nhăm ❤️💙
       <div class="modal-title"><i class="fas fa-images"></i> Góc Kỷ Niệm Của Chúng Mình</div>
       
       <div class="gallery-grid">
-        <!-- Ảnh 1 -->
         <div class="polaroid-card">
-          <img src="anh1.jpg" alt="Kỷ niệm 1">
+          <img src="anh1.jpg" alt="Photo 1">
           <div class="polaroid-caption">Cười tít mắt bên nhau ❤️</div>
         </div>
-
-        <!-- Ảnh 2 -->
         <div class="polaroid-card">
-          <img src="anh2.jpg" alt="Kỷ niệm 2">
+          <img src="anh2.jpg" alt="Photo 2">
           <div class="polaroid-caption">Đôi mắt kính siêu hợp cạ 🤓</div>
         </div>
-
-        <!-- Ảnh 3 -->
         <div class="polaroid-card">
-          <img src="anh3.jpg" alt="Kỷ niệm 3">
+          <img src="anh3.jpg" alt="Photo 3">
           <div class="polaroid-caption">Khoảnh khắc nhí nhố cùng anh ✨</div>
         </div>
-
-        <!-- Ảnh 4 -->
         <div class="polaroid-card">
-          <img src="anh4.jpg" alt="Kỷ niệm 4">
+          <img src="anh4.jpg" alt="Photo 4">
           <div class="polaroid-caption">Thả tim cùng Akuma 💖</div>
         </div>
       </div>
+    </div>
+  </div>
 
   <!-- 3. POPUP THẺ NGUYỆN ƯỚC (CHỈ ĐƯỢC CHỌN 1) -->
   <div class="modal" id="wishModal">
@@ -605,11 +600,11 @@ I love you nhăm nhăm ❤️💙
   </div>
 
   <script>
-    // Link audio giọng hát của bạn (Đã được nhúng trực tiếp file SAY.mp3)
-    const AUDIO_URL = "SAY.mp3";
+    // Link audio giọng hát của bạn (Để file SAY.mp3 cùng thư mục với index.html)
+    const AUDIO_URL = "SAY.mp3"; 
     
     // Link ảnh của hai bạn
-    const MY_PHOTO_URL = "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80";
+    const MY_PHOTO_URL = "anh4.jpg";
 
     const audio = document.getElementById('bgAudio');
     audio.src = AUDIO_URL;
