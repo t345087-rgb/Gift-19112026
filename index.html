@@ -23,7 +23,7 @@
 
     body {
       background: linear-gradient(rgba(15, 0, 3, 0.82), rgba(26, 2, 5, 0.9)), 
-                  url('anh4.jpg') no-repeat center center fixed;
+                  url('anh7.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #333;
       min-height: 100vh;
@@ -417,7 +417,7 @@
 
   <!-- Welcome Screen Overlay -->
   <div class="welcome-overlay" id="welcomeOverlay">
-    <img class="welcome-bg-image" id="couplePhoto" src="anh4.jpg" alt="Couple">
+    <img class="welcome-bg-image" id="couplePhoto" src="anh7.jpg" alt="Couple">
 
     <div class="welcome-card">
       <h2>Happy International Men's Day 19/11! ❤️❤️</h2>
@@ -484,7 +484,7 @@ I love you nhăm nhăm ❤️💙
     </div>
   </div>
 
-  <!-- 2. POPUP GÓC KỶ NIỆM (ALBUM POLAROID) -->
+  <!-- 2. POPUP GÓC KỶ NIỆM (ALBUM POLAROID 6 ẢNH) -->
   <div class="modal" id="galleryModal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeModal('galleryModal')">&times;</span>
@@ -506,6 +506,14 @@ I love you nhăm nhăm ❤️💙
         <div class="polaroid-card">
           <img src="anh4.jpg" alt="Photo 4">
           <div class="polaroid-caption">Thả tim cùng Akuma 💖</div>
+        </div>
+        <div class="polaroid-card">
+          <img src="anh5.jpg" alt="Photo 5">
+          <div class="polaroid-caption">Góc cận cảnh của anh 😎</div>
+        </div>
+        <div class="polaroid-card">
+          <img src="anh6.jpg" alt="Photo 6">
+          <div class="polaroid-caption">Còn đây là em nè 😘</div>
         </div>
       </div>
     </div>
@@ -603,8 +611,8 @@ I love you nhăm nhăm ❤️💙
     // Link audio giọng hát của bạn (Để file SAY.mp3 cùng thư mục với index.html)
     const AUDIO_URL = "SAY.mp3"; 
     
-    // Link ảnh của hai bạn
-    const MY_PHOTO_URL = "anh4.jpg";
+    // Ảnh nền đôi của hai bạn (dùng anh7.jpg làm nền toàn trang)
+    const MY_PHOTO_URL = "anh7.jpg";
 
     const audio = document.getElementById('bgAudio');
     audio.src = AUDIO_URL;
